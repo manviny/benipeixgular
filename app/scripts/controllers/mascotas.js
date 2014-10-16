@@ -8,10 +8,9 @@
  * Controller of the benipeixgularApp
  */
 angular.module('benipeixgularApp')
-  .controller('MascotasCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MascotasCtrl', function ($scope, pwPage) {
+  		pwPage.getPage('1199')
+  		.then(function(response){
+  			console.debug("Mis datos", response);
+  		})
   });
