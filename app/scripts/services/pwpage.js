@@ -8,7 +8,7 @@
  * Factory in the benipeixgularApp.
  */
 angular.module('benipeixgularApp')
-app.factory('pwPage', function ($http, $q, $filter, $upload, $rootScope) {
+.factory('pwPage', function ($http, $q, $filter, $rootScope) {
  
 /**
  *      - createPage(parent, template, title) 
@@ -99,7 +99,7 @@ app.factory('pwPage', function ($http, $q, $filter, $upload, $rootScope) {
  
             var deferred = $q.defer();
  
-            $http({url: '/web-service/get-page/', method: "POST", data: { pageId: pageId }} )
+            $http({url: 'http://hospitalveterinariobenipeixcar.es/web-service/get-page/', method: "POST", data: { pageId: pageId }} )
                 .success(function(response){
                     deferred.resolve(response);
             });
