@@ -31,11 +31,13 @@ angular.module('benipeixgularApp')
   *
   *     - createMunicipioP24
  */
- 
- 
+
+
+    var absolutePath = 'http://hospitalveterinariobenipeixcar.es/';
+
     var result = { 
- 
- 
+
+
         /**
          * Creates a new PW page
          * @param  {[type]} parent   id of the parent
@@ -44,14 +46,14 @@ angular.module('benipeixgularApp')
          * @return {[type]}          [description]
          */
         createPage: function (parent, template, title) {
-            var promise = $http({url: '/web-service/create-page/', method: "POST", data: { parent: parent , template: template, title: title}} )
+            var promise = $http({url: absolutePath + 'web-service/create-page/', method: "POST", data: { parent: parent , template: template, title: title}} )
                 .then(  
                     function(response) { return response.config.data }, 
                     function(response) { console.debug("no se ha podido guardar, intentar de nuevo")} 
                 );
             return promise;    
         },
- 
+
         /**
          * Empty content from field, if is an array, remove only the element with the name content, ex: image, picture.jpg
          * 
@@ -66,15 +68,15 @@ angular.module('benipeixgularApp')
          * @return {[type]}           [description]
          */
         removeFromField: function (pageId, fieldName, content) {
-            var promise = $http({url: '/web-service/remove-from-field/', method: "POST", data: { pageId: pageId , fieldName: fieldName, content: content}} )
+            var promise = $http({url: absolutePath + 'web-service/remove-from-field/', method: "POST", data: { pageId: pageId , fieldName: fieldName, content: content}} )
                 .then(  
                     function(response) { return response.config.data }, 
                     function(response) { console.debug("no se ha podido guardar, intentar de nuevo")} 
                 );
             return promise;    
         },
- 
- 
+
+
         /**
          * Updates Data Page
          * @param  {[type]} pageId Id of the page where data will be stored
@@ -82,45 +84,45 @@ angular.module('benipeixgularApp')
          * @return {[type]}        
          */
         upgradePage: function (pageId, data) {
-            var promise = $http({url: '/web-service/upgrade-page/', method: "POST", data: { pageId: pageId , data: data}} )
+            var promise = $http({url: absolutePath + 'web-service/upgrade-page/', method: "POST", data: { pageId: pageId , data: data}} )
                 .then(  
                     function(response) { return response.config.data }, 
                     function(response) { console.debug("no se ha podido guardar, intentar de nuevo")} 
                 );
             return promise;    
         },
- 
+
         /**
          * Gets Data from desired page in server
          * @param  {[type]} pageId Id of the page we want
          * @return {[type]}        data encoded in json format
          */
         getPage: function (pageId) {
- 
+
             var deferred = $q.defer();
- 
-            $http({url: 'http://hospitalveterinariobenipeixcar.es/web-service/get-page/', method: "POST", data: { pageId: pageId }} )
+
+            $http({url: absolutePath + 'web-service/get-page/', method: "POST", data: { pageId: pageId }} )
                 .success(function(response){
                     deferred.resolve(response);
             });
- 
+
             return deferred.promise;    
         },
- 
+
         /**
          * Gets Data from desired page in server
          * @param  {[type]} pageId Id of the page we want
          * @return {[type]}        data encoded in json format
          */
         saveToJson: function (pageId) {
- 
+
             var deferred = $q.defer();
- 
-            $http({url: '/web-service/save-to-json/', method: "POST", data: { pageId: pageId }} )
+
+            $http({url: absolutePath + 'web-service/save-to-json/', method: "POST", data: { pageId: pageId }} )
                 .success(function(response){
                     deferred.resolve(response);
             });
- 
+
             return deferred.promise;    
         },
         /**
@@ -131,17 +133,17 @@ angular.module('benipeixgularApp')
          * @return {[type]}          [description]
          */
         getChildren: function (pageId, selector, fields) {
- 
+
             var deferred = $q.defer();
- 
-            $http({url: '/web-service/get-children/', method: "POST", data: { pageId: pageId, selector: selector, fields: fields }} )
+
+            $http({url: absolutePath + 'web-service/get-children/', method: "POST", data: { pageId: pageId, selector: selector, fields: fields }} )
                 .success(function(response){
                     deferred.resolve(response);
             });
- 
+
             return deferred.promise;    
         },
- 
+
         /**
          * Gets Children form page
          * @param  {[type]} pageId   parent o where to start from
@@ -150,17 +152,17 @@ angular.module('benipeixgularApp')
          * @return {[type]}          [description]
          */
         togglePublished: function (pageId, state) {
- 
+
             var deferred = $q.defer();
- 
-            $http({url: '/web-service/toggle-published/', method: "POST", data: { pageId: pageId, state: state }} )
+
+            $http({url: absolutePath + 'web-service/toggle-published/', method: "POST", data: { pageId: pageId, state: state }} )
                 .success(function(response){
                     deferred.resolve(response);
             });
- 
+
             return deferred.promise;    
         },
- 
+
         /**
          * Save files to a PW page NEEDS TO BE INSTALLED =>  
          *                                 https://github.com/danialfarid/angular-file-upload
@@ -173,10 +175,10 @@ angular.module('benipeixgularApp')
          */
         uploadFile: function($files, PageID, InputFieldType, removeAll) {
             var deferred = $q.defer();
- 
+
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
- 
+
                 if (file.type.indexOf('image') == -1) {
                     alert("La imagen debe ser del tipo JPG o PNG");
                      // $scope.error = 'image extension not allowed, please choose a JPEG or PNG file.'            
@@ -186,23 +188,23 @@ angular.module('benipeixgularApp')
                      // $scope.error ='File size cannot exceed 2 MB';
                 }     
                 var Fileupload = $upload.upload({
-                    url: '/web-service/upload-file/',
+                    url: absolutePath + 'web-service/upload-file/',
                     data: {
                         paginaActual: PageID,   // id de la pagina donde se guarda
                         image_field : InputFieldType,       // nombre del campo de imagenes en pw
                         removeAll : removeAll,              // borra las imagenes antiguas
                     }, 
                     file: file, // un file cada vez
- 
+
                   }).success(function(data, status, headers, config) {
                     console.debug("data",config);
                     deferred.resolve(config);
- 
+
                   });
             }//for
             return deferred.promise;            
         },
- 
+
         /**
          * Creates a JSON file under files assets/PageID with the name PageID.json
          * @param  {[type]} PageID   id of the folder where the file will be saved
@@ -212,23 +214,23 @@ angular.module('benipeixgularApp')
          * @return {[type]}          [description]
          */
         createJson: function (pageId, title, selector, fields) {
-            var promise = $http({url: '/web-service/create-json/', method: "POST", data: { pageId: pageId, title:title, selector: selector, fields: fields }} )
+            var promise = $http({url: absolutePath + 'web-service/create-json/', method: "POST", data: { pageId: pageId, title:title, selector: selector, fields: fields }} )
             .then( function(response) { return response.config.data });
             return promise;    
         },        
- 
+
         /**
          * Modulo especifico para P24 para crear municipio
          * @param  {[type]} pageId [description]
          * @return {[type]}        [description]
          */
         createMunicipioP24: function (pageId) {
-            var promise = $http({url: '/web-service/create-municipio-p24/', method: "POST", data: { pageId: pageId}} )
+            var promise = $http({url: absolutePath + 'web-service/create-municipio-p24/', method: "POST", data: { pageId: pageId}} )
             .then( function(response) { return response.config.data });
             return promise;    
         },   
- 
+
     }
- 
+
     return result;
 })
