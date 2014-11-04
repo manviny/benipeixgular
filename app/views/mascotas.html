@@ -24,6 +24,18 @@
     </div>
 
 
-    <div ng-controller="MainCtrl">
-      <div id="grid1" ui-grid="{ data: myData }" class="gridStyle"></div>
-    </div>
+<table st-table="myData" class="table table-striped">
+  <thead>
+  <tr>
+    <th>nombre</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="row in myData">
+    <td>{{row.title}}</td>
+
+  </tr>
+  </tbody>
+</table>
+

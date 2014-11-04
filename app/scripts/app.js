@@ -16,7 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.grid',
     'ui.bootstrap',
     'smart-table'
   ])
