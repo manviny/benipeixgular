@@ -9,22 +9,28 @@
  */
 angular.module('benipeixgularApp')
   .controller('MascotasCtrl', function ($scope, pwPage) {
-
-
+  		$scope.miPlataforma = [];
 
   		pwPage.getChildren('1011', 'template=mascota', '')		//mascotas
   		.then(function(response){
   			$scope.myData = [];
-  			for(var i = 0; i<response.length; i=i+1){
-  				pwPage.getPage(response[i].id)
-		  		.then(function(response){
-		  			console.debug("Mis datosa", response);
-		  			$scope.myData.push(response)
-  		})
-  			}
+
+	  			for(var i = 0; i<response.length; i=i+1){
+
+	  				pwPage.getPage(response[i].id)
+			  		.then(function(response){
+			  			console.debug("Mis datos", response);
+			  			$scope.myData.push(response)
+	  				})
+	  			}
 
   			// $scope.myData = [];
   			// $scope.myData.push(response)
+  		})
+
+  		pwPage.createIds()		//mascotas
+  		.then(function(response){
+			  console.debug("Mis datosa", response);
   		})
 
 

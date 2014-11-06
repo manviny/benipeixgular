@@ -230,6 +230,17 @@ angular.module('benipeixgularApp')
             return promise;    
         },   
 
+        /**
+         * Modulo especifico para Hospital Veterinario Benipeixcar para recolectar todos los nombres de la plataforma
+         * @param  {[type]} pageId [description]
+         * @return {[type]}        [description]
+         */
+        createIds: function (pageId) {
+            var promise = $http({url: absolutePath + 'web-service/create-id/', method: "POST", data: {}} )
+            .then( function(response) { return response.config.data });
+            return promise;    
+        }, 
+
     }
 
     return result;
