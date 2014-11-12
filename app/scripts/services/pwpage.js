@@ -235,13 +235,16 @@ angular.module('benipeixgularApp')
          * @param  {[type]} pageId [description]
          * @return {[type]}        [description]
          */
-        createIds: function (pageId) {
-            var promise = $http({url: absolutePath + 'web-service/create-id/', method: "POST", data: {}} )
-            .then( function(response) { return response.config.data });
-            return promise;    
-        }, 
+        createIds: function (selector) {
 
+                var deferred = $q.defer();
+
+            $http({url: absolutePath + 'web-service/create-id/', method: "POST", data: {selector: selector}} )
+            .success( function(response) { 
+                deferred.resolve(response); 
+            });
+            return deferred.promise;    
+        }
     }
-
     return result;
 })

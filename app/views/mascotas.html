@@ -27,13 +27,22 @@
 <table st-table="myData" class="table table-striped">
   <thead>
   <tr>
-    <th>nombre</th>
+    <th>Nombre</th>
+    <th>Propietario</th>
+    <th>Clinica</th>
+    <th>Chip</th>
+    <th>Caracteristicas</th>
 
   </tr>
   </thead>
   <tbody>
   <tr ng-repeat="row in myData">
     <td>{{row.title}}</td>
+    <td>{{myIds}} [{{row.mascotaPropietario}}]</td>
+    <td>{{row.title}}</td>
+    <td>{{row.title}}</td>
+    <td>{{row.title}}</td>
+    
 
   </tr>
   </tbody>

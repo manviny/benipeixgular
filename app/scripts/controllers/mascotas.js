@@ -28,9 +28,11 @@ angular.module('benipeixgularApp')
   			// $scope.myData.push(response)
   		})
 
-  		pwPage.createIds()		//mascotas
+  		pwPage.createIds('template=desplegable')		//mascotas
   		.then(function(response){
-			  console.debug("Mis datosa", response);
+  			$scope.myIds = [];
+			console.log("Mis datosa", response);
+			$scope.myIds.push(response)
   		})
 
 
