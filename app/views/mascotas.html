@@ -26,22 +26,41 @@
 
 <table st-table="myData" class="table table-striped">
   <thead>
-  <tr>
-    <th>Nombre</th>
+      <tr>
+  <div class="row">
+
+     <th class="col-md-3"> <input st-search="title" placeholder="search for firstname" class="input-sm form-control" type="search"/></th>
+     <th class="col-md-5"> <input st-search placeholder="global search" class="input-sm form-control" type="search"/></th>
+
+            <th class="col-md-4">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+            </th>
+
+    </div>
+</tr>
+<tr>
+    <th  lr-drag-src="headers" lr-drop-target="headers" st-sort="title">Nombre</th>
     <th>Propietario</th>
     <th>Clinica</th>
     <th>Chip</th>
     <th>Caracteristicas</th>
-
+    <th>Castrado</th>
   </tr>
+
   </thead>
   <tbody>
   <tr ng-repeat="row in myData">
     <td>{{row.title}}</td>
-    <td>{{myIds}} [{{row.mascotaPropietario}}]</td>
-    <td>{{row.title}}</td>
-    <td>{{row.title}}</td>
-    <td>{{row.title}}</td>
+    <td>{{row.mascotaPropietario}}</td>
+    <td>{{row.mascotaClinicaRemitente}}</td>
+    <td>{{row.mascotaChip}}</td>
+    <td>{{row.mascotaEspecie}} - {{row.mascotaSexo}} - {{row.mascotaCapa}} - {{row.mascotaCaracter}}</td>
+    <td>{{row.mascotaCastrado}}</td>
     
 
   </tr>
